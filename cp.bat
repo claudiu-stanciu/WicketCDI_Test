@@ -1,0 +1,1 @@
+copy Inj3-ear\target\Inj3-ear.ear %JBOSS_HOME%\standalone\deployments /Y
