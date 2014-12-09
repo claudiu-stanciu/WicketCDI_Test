@@ -12,11 +12,18 @@ public class MyBeanExecutor implements IBean{
 	
 	Logger LOG=Logger.getLogger(MyBeanExecutor.class);
 	public void start(IWorkflowListener listener) {
+		
 		LOG.info("Executor bean start @ "+ new java.util.Date());
-        ExecutorService es = Executors.newFixedThreadPool(3);
-		es.execute(new MyRunnable(listener));		
+
+		MyRunnable runnable = new MyRunnable(listener);
+		runnable.run(); // this works (sync mode)
+		
+//		this fails (async mode)
+//      ExecutorService es = Executors.newSingleThreadExecutor();
+//		es.execute(runnable);		
+//		es.shutdown();
+
 		LOG.info("Executor bean stop @ "+ new java.util.Date());
-		es.shutdown();
 	}
 
 	public String getString(){		

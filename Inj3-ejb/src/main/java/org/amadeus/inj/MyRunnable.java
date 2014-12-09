@@ -20,7 +20,7 @@ public class MyRunnable implements Runnable {
 			Thread.currentThread().interrupt();
 		}
 		//Push message to listener
-		this.listener.onMessage("Stopped Runnable" + new java.util.Date());
+		this.listener.onMessage("Runnable end @ " + new java.util.Date());
 		LOG.info("Runnable end @ "+ new java.util.Date());		
 	}
 }

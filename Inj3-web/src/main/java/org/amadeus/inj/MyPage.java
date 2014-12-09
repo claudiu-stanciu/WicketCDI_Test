@@ -65,8 +65,8 @@ public class MyPage extends WebPage {
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
 				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
-				//LOG.info("CDI Async bean start @ "+ new java.util.Date());
 				target.add(label1);
+				//TODO Rewrite CDI Async result call to not block UI thread 
 				try {
 					label2.setDefaultModelObject(myBeanAsync.start().get());
 					target.add(label2);

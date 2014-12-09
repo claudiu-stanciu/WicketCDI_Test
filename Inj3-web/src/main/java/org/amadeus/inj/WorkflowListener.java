@@ -8,7 +8,7 @@ import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WorkflowListener implements IWorkflowListener{
+public class WorkflowListener implements IWorkflowListener {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(WorkflowListener.class);
 
@@ -29,10 +29,6 @@ public class WorkflowListener implements IWorkflowListener{
 
 			return registry.getConnection(application, wsinfos.getSessionId(),
 					wsinfos.getKey());
-
-			// return new
-			// SimpleWebSocketConnectionRegistry().getConnection(Application.get(wsinfos.getApplicationName()),
-			// wsinfos.getSessionId(), wsinfos.getKey());
 		} else {
 			LOG.error("WebSocket client is unknown");
 		}
@@ -48,10 +44,10 @@ public class WorkflowListener implements IWorkflowListener{
 
 		if (connection != null && connection.isOpen()) {
 			LOG.info("Websocket connection is opened");
-			//Problem with sendMessage => WELD-001303 No active contexts for scope type javax.enterprise.context.SessionScoped 
+			// Problem with sendMessage => WELD-001303 No active contexts for
+			// scope type javax.enterprise.context.SessionScoped
 			connection.sendMessage(new StatusMessage(String.valueOf(message)));
-		}
-		else {
+		} else {
 			LOG.info("Websocket connection is null or closed");
 		}
 	}

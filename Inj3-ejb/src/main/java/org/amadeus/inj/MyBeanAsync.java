@@ -7,6 +7,7 @@ import javax.ejb.Asynchronous;
 import javax.enterprise.context.RequestScoped;
 import org.jboss.logging.Logger;
 // CDI implementation with Asynchronous mode, and Future return
+// This works, but is blocking the UI thread
 @RequestScoped
 @Asynchronous
 public class MyBeanAsync implements IBean{
