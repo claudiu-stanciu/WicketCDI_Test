@@ -18,7 +18,16 @@ Use case to test integration of Wicket + CDI Injection + WebSockets with the goa
 	- CDI Async: starts the bean myBeanAsync, which contains a Future<String> implementation to sleep the thread for 5 secs 
 		and log the flow. Returns a message when it stopped.
 	- Executor: starts the bean myBeanExecutor, which starts runnable.run() a MyRunnable instance. runnable.run() sleeps
-		the thread for 5 secs, logs the flow and pushed a message through the listener provided. 
+		the thread for 5 secs, logs the flow and pushes a message through the listener provided. 
 		If myBeanExecutor starts an ExecutorService which runs runnable, then through listener.onMessage implementation ->
 		connection.sendMessage() triggers a WELD-001303 No active contexts for scope type javax.enterprise.context.SessionScoped 
 		when run in the context of an ExecutorService;
+
+Testing the project
+=======
+The project packs to an EAR. You can deploy it to WildFly 8 = %JBOSS_HOME%\standalone\deployments\
+deploy.bat handles the build with maven (mvn clean install) and copy the target(Inj3-ear.ear) to WildFly.
+The webapp is accesed from http://localhost:8080/Inj3-web/
+
+
+
