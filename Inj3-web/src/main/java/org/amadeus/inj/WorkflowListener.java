@@ -46,7 +46,11 @@ public class WorkflowListener implements IWorkflowListener {
 			LOG.info("Websocket connection is opened");
 			// Problem with sendMessage => WELD-001303 No active contexts for
 			// scope type javax.enterprise.context.SessionScoped
-			connection.sendMessage(new StatusMessage(String.valueOf(message)));
+			try{
+				connection.sendMessage(new StatusMessage(String.valueOf(message)));
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		} else {
 			LOG.info("Websocket connection is null or closed");
 		}

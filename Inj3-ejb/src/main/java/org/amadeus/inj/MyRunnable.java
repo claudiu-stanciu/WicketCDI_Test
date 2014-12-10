@@ -13,14 +13,14 @@ public class MyRunnable implements Runnable {
 	private final IWorkflowListener listener;
 
 	public void run() {
-		LOG.info("Runnable start @ "+ new java.util.Date());
+		LOG.info("Runnable start @ "+ new java.util.Date()+" in thread "+ Thread.currentThread().getName());
 		try {
 			Thread.sleep(5000); // 1000 milliseconds is one second.
 		} catch (InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
 		//Push message to listener
-		this.listener.onMessage("Runnable end @ " + new java.util.Date());
-		LOG.info("Runnable end @ "+ new java.util.Date());		
+		this.listener.onMessage("Runnable end @ " + new java.util.Date() +" in thread "+ Thread.currentThread().getName());
+		LOG.info("Runnable end @ "+ new java.util.Date() +" in thread "+ Thread.currentThread().getName());		
 	}
 }

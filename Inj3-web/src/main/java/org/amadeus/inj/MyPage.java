@@ -31,8 +31,8 @@ public class MyPage extends WebPage {
 	@Inject
 	private MyBeanExecutor myBeanExecutor;
 	
-	@Inject
-	private BeanManager bm;
+//	@Inject
+//	private BeanManager bm;
 	
 	Label label1;
 	Label label2;
@@ -53,10 +53,10 @@ public class MyPage extends WebPage {
 	protected void onInitialize() {
 		super.onInitialize();
 
-		label1 = new Label("label1", Model.of("Started " + System.currentTimeMillis()));
+		label1 = new Label("label1", Model.of("Started " + System.currentTimeMillis()+" in thread "+ Thread.currentThread().getName()));
 		this.add(this.label1.setOutputMarkupId(true));
 		
-		label2 = new Label("label2", Model.of("Started " + System.currentTimeMillis()));
+		label2 = new Label("label2", Model.of("Started " + System.currentTimeMillis()+" in thread "+ Thread.currentThread().getName()));
 		this.add(this.label2.setOutputMarkupId(true));
 		
 		final Form<?> form = new Form<Void>("form");
@@ -68,15 +68,14 @@ public class MyPage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
+				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date()+" in thread "+ Thread.currentThread().getName());
 				target.add(label1);
 				//TODO Rewrite CDI Async result call to not block UI thread 
 				try {
-					label2.setDefaultModelObject(myBeanAsync.start().get());
+					//label2.setDefaultModelObject(myBeanAsync.start().get());
+					myBeanAsync.run(newWorkflowListener());
 					target.add(label2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {					
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -89,7 +88,7 @@ public class MyPage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Exec Async bean start @ "+ new java.util.Date());
+				label1.setDefaultModelObject("CDI Exec Async bean start @ "+ new java.util.Date()+" in thread "+ Thread.currentThread().getName());
 				target.add(label1);
 				myBeanExecutor.start(newWorkflowListener());
 			}
@@ -104,7 +103,7 @@ public class MyPage extends WebPage {
 
 			@Override
 			protected void onConnect(ConnectedMessage message) {
-				LOG.info("WebSocket client connected");
+				LOG.info("WebSocket client connected"+" in thread "+ Thread.currentThread().getName());
 				wsinfos = this.newWebSocketInfos(message);
 			}
 
