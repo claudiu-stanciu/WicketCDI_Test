@@ -2,6 +2,7 @@ package org.amadeus.inj;
 
 import java.util.concurrent.ExecutionException;
 
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import org.amadeus.inj.WorkflowListener.StatusMessage;
@@ -29,6 +30,9 @@ public class MyPage extends WebPage {
 
 	@Inject
 	private MyBeanExecutor myBeanExecutor;
+	
+	@Inject
+	private BeanManager bm;
 	
 	Label label1;
 	Label label2;
