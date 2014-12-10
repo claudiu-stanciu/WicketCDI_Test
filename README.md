@@ -26,7 +26,9 @@ Use case to test integration of Wicket + CDI Injection + WebSockets with the goa
 Testing the project
 =======
 The project packs to an EAR. You can deploy it to WildFly 8 = %JBOSS_HOME%\standalone\deployments\
+
 deploy.bat handles the build with maven (mvn clean install) and copy the target(Inj3-ear.ear) to WildFly.
+
 The webapp is accesed from http://localhost:8080/Inj3-web/
 
 
