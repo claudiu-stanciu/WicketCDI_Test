@@ -7,5 +7,5 @@ import javax.ejb.Local;
 public interface IMyBeanAsync {
 	public Future<String> start();
 	public void pushMessage(IWorkflowListener listener);
-	public void pushMessage();
+	public void noMessage();
 }

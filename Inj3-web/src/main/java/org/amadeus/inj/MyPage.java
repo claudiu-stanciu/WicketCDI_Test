@@ -62,7 +62,7 @@ public class MyPage extends WebPage {
 				super.onSubmit(target, form);
 				label1.setDefaultModelObject("CDI no message start @ "+ new java.util.Date());
 				target.add(label1);
-				myBeanAsync.pushMessage();
+				myBeanAsync.noMessage();
 			}				
 		};
 		form.add(test1);

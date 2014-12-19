@@ -37,7 +37,7 @@ public class MyBeanAsync implements IMyBeanAsync{
 		listener.onMessage("CDI Message from bean @ "+ new java.util.Date());
 	}	
 	
-	public void pushMessage(){
+	public void noMessage(){
 		try {
 			LOG.info("CDI Async bean without message start @ "+ new java.util.Date());
 			Thread.sleep(5000);
