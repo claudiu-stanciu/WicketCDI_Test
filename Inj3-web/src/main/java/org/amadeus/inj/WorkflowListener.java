@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WorkflowListener implements IWorkflowListener {
-	private static final Logger LOG = LoggerFactory
-			.getLogger(WorkflowListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(WorkflowListener.class);
 
 	private WebSocketInfos wsinfos;
 
@@ -45,7 +44,7 @@ public class WorkflowListener implements IWorkflowListener {
 		if (connection != null && connection.isOpen()) {
 			LOG.info("Websocket connection is opened");
 			// Problem with sendMessage => WELD-001303 No active contexts for
-			// scope type javax.enterprise.context.SessionScoped
+			// scope type javax.enterprise.context.SessionScoped			
 			connection.sendMessage(new StatusMessage(String.valueOf(message)));
 		} else {
 			LOG.info("Websocket connection is null or closed");

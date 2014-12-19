@@ -17,6 +17,7 @@ public class MyApp extends WebApplication{
 		
 		new CdiConfiguration().configure(this);
 		
+		
 	}
 	@Override
 	public Class<? extends Page> getHomePage() {

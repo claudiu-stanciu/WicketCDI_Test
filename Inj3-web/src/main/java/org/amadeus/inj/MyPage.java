@@ -1,7 +1,7 @@
 package org.amadeus.inj;
 
-import java.util.concurrent.ExecutionException;
-
+import javax.ejb.EJB;
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 
 import org.amadeus.inj.WorkflowListener.StatusMessage;
@@ -25,10 +25,13 @@ public class MyPage extends WebPage {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private MyBeanAsync myBeanAsync;
-
-	@Inject
-	private MyBeanExecutor myBeanExecutor;
+	private IMyBeanAsync myBeanAsync;
+	
+//	@Inject
+//	private MyBeanExecutor myBeanExecutor;
+	
+//	@Inject
+//	BeanSockets beanSocks;
 	
 	Label label1;
 	Label label2;
@@ -39,8 +42,7 @@ public class MyPage extends WebPage {
 	Logger LOG = LoggerFactory.getLogger(MyPage.class);
 	
 	public MyPage(PageParameters parameters) {
-		super(parameters);
-		
+		super(parameters);	
 		
 		this.add(this.newWebSocketBehavior());
 	}
@@ -66,16 +68,11 @@ public class MyPage extends WebPage {
 				super.onSubmit(target, form);
 				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
 				target.add(label1);
-				//TODO Rewrite CDI Async result call to not block UI thread 
-				try {
-					label2.setDefaultModelObject(myBeanAsync.start().get());
-					target.add(label2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {					
-					e.printStackTrace();
-				}
-			}
+
+				myBeanAsync.pushMessage();
+//				myBeanAsync.pushMessage(newWorkflowListener());
+
+			}				
 		};
 		form.add(test1);
 		
@@ -85,9 +82,11 @@ public class MyPage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Exec Async bean start @ "+ new java.util.Date());
+				label1.setDefaultModelObject("EJB Async bean start @ "+ new java.util.Date());
 				target.add(label1);
-				myBeanExecutor.start(newWorkflowListener());
+//				myBeanExecutor.start(newWorkflowListener());
+//				beanSocks.pushMessage();
+				myBeanAsync.pushMessage(newWorkflowListener());
 			}
 		};
 		form.add(test2);
@@ -132,5 +131,6 @@ public class MyPage extends WebPage {
 	private IWorkflowListener newWorkflowListener() {
 		return new WorkflowListener(this.wsinfos);
 	}
+	
 
 }

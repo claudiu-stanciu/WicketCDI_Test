@@ -38,64 +38,29 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
-
-    <dependencies>
-
-        <!-- Declare the APIs we depend on and need for compilation. All of 
-            them are provided by JBoss WildFly -->
-
-        <!-- Import the EJB API, we use provided scope as the API is included in JBoss WildFly -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
+	<properties>
+		<deltaspike.version>1.2.0</deltaspike.version>
+		<weld.version>2.1.2.Final</weld.version>
+	</properties>
+    <dependencies>     
 
         <!-- Import the CDI API, we use provided scope as the API is included in JBoss WildFly -->
+        <!-- WELD CDI API -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Import the JPA API, we use provided scope as the API is included in JBoss WildFly -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JSR-303 (Bean Validation) Implementation -->
-        <!-- Provides portable constraints such as @Email -->
-        <!-- Hibernate Validator is shipped in JBoss WildFly -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <!-- Test scope dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Optional, but highly recommended -->
-        <!-- Arquillian allows you to test enterprise code such as EJBs and 
-            Transactional(JTA) JPA from JUnit/TestNG -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-      
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>               
-        </dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>javax.ejb-api</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
 
     </dependencies>
 
@@ -136,38 +101,7 @@
             </build>
         </profile>
 
-        <profile>
-            <!-- An optional Arquillian testing profile that executes tests 
-                in your WildFly instance -->
-            <!-- This profile will start a new WildFly instance, and execute
-                the test, shutting it down when done -->
-            <!-- Run with: mvn clean test -Parq-wildfly-managed -->
-            <id>arq-wildfly-managed</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly</groupId>
-                    <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <version>${version.arquillian.container}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <!-- An optional Arquillian testing profile that executes tests 
-                in a remote WildFly instance -->
-            <!-- Run with: mvn clean test -Parq-wildfly-remote -->
-            <id>arq-wildfly-remote</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly</groupId>
-                    <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <version>${version.arquillian.container}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
+        
     </profiles>
 
 </project>
