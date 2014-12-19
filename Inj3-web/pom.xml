@@ -34,7 +34,6 @@
 	</licenses>
 	<properties>
 		<wicket.version>7.0.0-M4</wicket.version>
-		<deltaspike.version>1.2.0</deltaspike.version>
 	</properties>
 	<dependencies>
 		<!-- Dependency on the EJB module so we can use it's services if needed -->

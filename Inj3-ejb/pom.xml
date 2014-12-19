@@ -38,10 +38,6 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
-	<properties>
-		<deltaspike.version>1.2.0</deltaspike.version>
-		<weld.version>2.1.2.Final</weld.version>
-	</properties>
     <dependencies>     
 
         <!-- Import the CDI API, we use provided scope as the API is included in JBoss WildFly -->
