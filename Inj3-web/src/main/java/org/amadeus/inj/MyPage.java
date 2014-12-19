@@ -27,12 +27,6 @@ public class MyPage extends WebPage {
 	@Inject
 	private IMyBeanAsync myBeanAsync;
 	
-//	@Inject
-//	private MyBeanExecutor myBeanExecutor;
-	
-//	@Inject
-//	BeanSockets beanSocks;
-	
 	Label label1;
 	Label label2;
 	AjaxButton test1;
@@ -66,12 +60,9 @@ public class MyPage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
+				label1.setDefaultModelObject("CDI no message start @ "+ new java.util.Date());
 				target.add(label1);
-
 				myBeanAsync.pushMessage();
-//				myBeanAsync.pushMessage(newWorkflowListener());
-
 			}				
 		};
 		form.add(test1);
@@ -82,10 +73,8 @@ public class MyPage extends WebPage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
-				label1.setDefaultModelObject("EJB Async bean start @ "+ new java.util.Date());
+				label1.setDefaultModelObject("CDI with message start @ "+ new java.util.Date());
 				target.add(label1);
-//				myBeanExecutor.start(newWorkflowListener());
-//				beanSocks.pushMessage();
 				myBeanAsync.pushMessage(newWorkflowListener());
 			}
 		};
