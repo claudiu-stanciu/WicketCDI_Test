@@ -5,12 +5,15 @@ import java.util.concurrent.Future;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateful;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Stateful
-@RequestScoped
+@ApplicationScoped
 @Asynchronous
 public class MyBeanAsync implements IMyBeanAsync{
 
