@@ -1,17 +1,18 @@
 package org.amadeus.inj;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //Runnable implementation
 public class MyRunnable implements Runnable {
-	Logger LOG=Logger.getLogger(MyRunnable.class);
+	private final IWorkflowListener listener;
+	
+	Logger LOG=LoggerFactory.getLogger(MyRunnable.class);
 	
 	public MyRunnable(IWorkflowListener listener) {
 		this.listener = listener;
 	}
 	
-	private final IWorkflowListener listener;
-
 	public void run() {
 		LOG.info("Runnable start @ "+ new java.util.Date());
 		try {
