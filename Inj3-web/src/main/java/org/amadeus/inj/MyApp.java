@@ -1,7 +1,6 @@
 package org.amadeus.inj;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
 

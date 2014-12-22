@@ -40,6 +40,7 @@
    </licenses>
 	<properties>
 		<wicket.version>7.0.0-M4</wicket.version>
+		<javaee.version>7.0</javaee.version>
 	</properties>
    <dependencies>
       <!-- Dependency on the EJB module so we can use it's services if needed -->
@@ -74,13 +75,6 @@
 			<version>${wicket.version}</version>
 		</dependency>
 
-		<!-- CDI -->
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-cdi-1.1</artifactId>
-			<version>${wicket.version}</version>
-		</dependency>
-		
 		<!-- EJB -->
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
@@ -90,10 +84,9 @@
 		  <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
+            <version>${javaee.version}</version>
             <scope>provided</scope>
         </dependency>
-
 		
 		<!-- WebSockets -->
 		<dependency>
@@ -107,49 +100,6 @@
 			<artifactId>wicket-native-websocket-javax</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
-		
-      <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss WildFly -->
-      <dependency>
-         <groupId>org.jboss.resteasy</groupId>
-         <artifactId>jaxrs-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-      <!-- Import the CDI API, we use provided scope as the API is included in JBoss WildFly -->
-      <dependency>
-         <groupId>javax.enterprise</groupId>
-         <artifactId>cdi-api</artifactId>
-         <scope>provided</scope>
-      </dependency>      
-       
-      <!-- Import the JSF API, we use provided scope as the API is included in JBoss WildFly -->
-      <dependency>
-         <groupId>org.jboss.spec.javax.faces</groupId>
-         <artifactId>jboss-jsf-api_2.2_spec</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-      <!-- Import the JPA API, we use provided scope as the API is included in JBoss WildFly -->
-      <dependency>
-         <groupId>org.hibernate.javax.persistence</groupId>
-         <artifactId>hibernate-jpa-2.1-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-
-       <!-- JSR-303 (Bean Validation) Implementation -->
-       <!-- Provides portable constraints such as @Email -->
-       <!-- Hibernate Validator is shipped in JBoss WildFly -->
-       <dependency>
-           <groupId>org.hibernate</groupId>
-           <artifactId>hibernate-validator</artifactId>
-           <scope>provided</scope>
-           <exclusions>
-               <exclusion>
-                   <groupId>org.slf4j</groupId>
-                   <artifactId>slf4j-api</artifactId>
-               </exclusion>
-           </exclusions>
-       </dependency>
 
    </dependencies>
 

@@ -1,9 +1,6 @@
 package org.amadeus.inj;
 
-import java.util.concurrent.ExecutionException;
-
 import javax.ejb.EJB;
-import javax.inject.Inject;
 
 import org.amadeus.inj.WorkflowListener.StatusMessage;
 import org.apache.wicket.Component;
@@ -37,16 +34,12 @@ public class MyPage extends WebPage {
 	Label label1;
 	Label label2;
 	AjaxButton test1;
-	AjaxButton test2;
-	AjaxButton test3;
 	
 	private WebSocketInfos wsinfos = null;
 	Logger LOG = LoggerFactory.getLogger(MyPage.class);
 	
 	public MyPage(PageParameters parameters) {
-		super(parameters);
-		
-		
+		super(parameters);	
 		this.add(this.newWebSocketBehavior());
 	}
 	
@@ -54,50 +47,16 @@ public class MyPage extends WebPage {
 	protected void onInitialize() {
 		super.onInitialize();
 
-		label1 = new Label("label1", Model.of("Started " + System.currentTimeMillis()));
+		label1 = new Label("label1", Model.of("Started " + new java.util.Date()));
 		this.add(this.label1.setOutputMarkupId(true));
 		
-		label2 = new Label("label2", Model.of("Started " + System.currentTimeMillis()));
+		label2 = new Label("label2", Model.of("Started " + new java.util.Date()));
 		this.add(this.label2.setOutputMarkupId(true));
 		
 		final Form<?> form = new Form<Void>("form");
 		this.add(form);
-
+	
 		test1 = new AjaxButton("test1") {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
-				target.add(label1);
-				//TODO Rewrite CDI Async result call to not block UI thread 
-//				try {
-//					label2.setDefaultModelObject(myBeanAsync.start().get());
-//					target.add(label2);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				} catch (ExecutionException e) {					
-//					e.printStackTrace();
-//				}
-			}
-		};
-		form.add(test1);
-		
-		test2 = new AjaxButton("test2") {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-				super.onSubmit(target, form);
-				label1.setDefaultModelObject("CDI Exec Async bean start @ "+ new java.util.Date());
-				target.add(label1);
-//				myBeanExecutor.start(newWorkflowListener());
-			}
-		};
-		form.add(test2);
-		
-		test3 = new AjaxButton("test3") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -108,7 +67,7 @@ public class MyPage extends WebPage {
 				myEJB.start(newWorkflowListener());
 			}
 		};
-		form.add(test3);
+		form.add(test1);
 	}
 	
 	private final WebSocketBehavior newWebSocketBehavior() {
@@ -127,7 +86,7 @@ public class MyPage extends WebPage {
 					IWebSocketPushMessage message) {
 				if (message instanceof StatusMessage) {
 					String value = ((StatusMessage) message).getStatus();
-					// See result of CDI Executor Asynchronous
+					// See result of Asynchronous Bean
 					label2.setDefaultModelObject(value);
 					handler.add(label2);
 				}
