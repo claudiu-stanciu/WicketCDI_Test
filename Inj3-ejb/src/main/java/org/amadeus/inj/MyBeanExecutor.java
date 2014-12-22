@@ -26,8 +26,4 @@ public class MyBeanExecutor implements IBean{
 
 		LOG.info("Executor bean stop @ "+ new java.util.Date());
 	}
-
-	public String getString(){		
-		return "Executor bean returned";
-	}
 }

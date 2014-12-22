@@ -2,6 +2,7 @@ package org.amadeus.inj;
 
 import java.util.concurrent.ExecutionException;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 
 import org.amadeus.inj.WorkflowListener.StatusMessage;
@@ -24,16 +25,20 @@ public class MyPage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private MyBeanAsync myBeanAsync;
-
-	@Inject
-	private MyBeanExecutor myBeanExecutor;
+//	@Inject
+//	private MyBeanAsync myBeanAsync;
+//
+//	@Inject
+//	private MyBeanExecutor myBeanExecutor;
+//	
+	@EJB(name="ejb/MyEJB")
+	private IMyEJB myEJB;
 	
 	Label label1;
 	Label label2;
 	AjaxButton test1;
 	AjaxButton test2;
+	AjaxButton test3;
 	
 	private WebSocketInfos wsinfos = null;
 	Logger LOG = LoggerFactory.getLogger(MyPage.class);
@@ -67,14 +72,14 @@ public class MyPage extends WebPage {
 				label1.setDefaultModelObject("CDI Async bean start @ "+ new java.util.Date());
 				target.add(label1);
 				//TODO Rewrite CDI Async result call to not block UI thread 
-				try {
-					label2.setDefaultModelObject(myBeanAsync.start().get());
-					target.add(label2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {					
-					e.printStackTrace();
-				}
+//				try {
+//					label2.setDefaultModelObject(myBeanAsync.start().get());
+//					target.add(label2);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				} catch (ExecutionException e) {					
+//					e.printStackTrace();
+//				}
 			}
 		};
 		form.add(test1);
@@ -87,10 +92,23 @@ public class MyPage extends WebPage {
 				super.onSubmit(target, form);
 				label1.setDefaultModelObject("CDI Exec Async bean start @ "+ new java.util.Date());
 				target.add(label1);
-				myBeanExecutor.start(newWorkflowListener());
+//				myBeanExecutor.start(newWorkflowListener());
 			}
 		};
 		form.add(test2);
+		
+		test3 = new AjaxButton("test3") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				super.onSubmit(target, form);
+				label1.setDefaultModelObject("EJB Async bean start @ "+ new java.util.Date());
+				target.add(label1);
+				myEJB.start(newWorkflowListener());
+			}
+		};
+		form.add(test3);
 	}
 	
 	private final WebSocketBehavior newWebSocketBehavior() {

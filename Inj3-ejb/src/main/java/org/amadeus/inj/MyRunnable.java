@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 
 //Runnable implementation
 public class MyRunnable implements Runnable {
-	private final IWorkflowListener listener;
-	
+	IWorkflowListener listener;	
 	Logger LOG=LoggerFactory.getLogger(MyRunnable.class);
 	
 	public MyRunnable(IWorkflowListener listener) {

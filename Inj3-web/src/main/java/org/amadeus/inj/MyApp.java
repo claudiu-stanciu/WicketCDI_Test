@@ -3,6 +3,7 @@ package org.amadeus.inj;
 import org.apache.wicket.Page;
 import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.wicketstuff.javaee.injection.JavaEEComponentInjector;
 
 public class MyApp extends WebApplication{
 
@@ -15,7 +16,8 @@ public class MyApp extends WebApplication{
 	protected void init() {
 		super.init();
 		
-		new CdiConfiguration().configure(this);
+		//new CdiConfiguration().configure(this);
+		getComponentInstantiationListeners().add(new JavaEEComponentInjector(this));
 		
 	}
 	@Override
