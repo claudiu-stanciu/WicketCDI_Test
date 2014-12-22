@@ -1,8 +1,8 @@
-WicketCDI_Test
+WicketCDI_Test -> EJB_test
 ==============
 
-Wicket + CDI + WebSockets use case test
-Use case to test integration of Wicket + CDI Injection + WebSockets with the goal of achieving asynchronous beans.
+Wicket + EJB Async + WebSockets use case test
+Use case to test integration of Wicket + EJB Async + WebSockets with the goal of achieving asynchronous beans.
 + Descriptions
   - MyPage contains the Wicket UI: 
     label1 - start message after button push
