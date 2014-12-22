@@ -1,4 +1,4 @@
-WicketCDI_Test
+WicketCDI_Test -> EJB_test
 ==============
 
 Wicket + EJB Async + WebSockets use case test
