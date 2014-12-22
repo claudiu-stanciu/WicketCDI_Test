@@ -22,12 +22,6 @@ public class MyPage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
 
-//	@Inject
-//	private MyBeanAsync myBeanAsync;
-//
-//	@Inject
-//	private MyBeanExecutor myBeanExecutor;
-//	
 	@EJB(name="ejb/MyEJB")
 	private IMyEJB myEJB;
 	
